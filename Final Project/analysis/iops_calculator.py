@@ -1,7 +1,8 @@
-# analysis/iops_calculator.py
-
-def disk_load(total_iops, read_ratio, write_ratio, write_penalty):
-    """
-    Compute total IOPS with dynamic read/write ratio and RAID write penalty.
-    """
-    return (total_iops * read_ratio) + (total_iops * write_ratio * write_penalty)
+# total_ops = measured read + write operations (number of lines or blocks)
+# Adjusted for RAID write penalty
+def calculate_iops_per_raid(total_ops, read_ratio, write_ratio, write_penalty, avg_read, avg_write):
+  
+    effective_time_per_op = (avg_read * read_ratio) + (avg_write * write_ratio * write_penalty)
+    
+    iops = total_ops / effective_time_per_op
+    return iops
