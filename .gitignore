@@ -1,0 +1,4 @@
+.gradio/
+.gitignore
+analysis/__pycache__/*
+storage/
